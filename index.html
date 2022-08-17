@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <title>TC Profile Maker</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./dom-to-image.min.js"></script>
+    <script src="./file-saver.min.js"></script>
+    <script src="./tools.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <img src="" alt="TC" /><br />
+      <h1>Profile Picture Maker</h1>
+    </div>
+    <form method="post" action="" enctype="multipart/form-data" id="myform">
+      <input
+        type="file"
+        id="file"
+        name="file"
+        accept="image/png, image/jpeg, image/jpg"
+      />
+      <input type="button" class="button" value="Upload" id="but_upload" />
+    </form>
+
+    <div id="controls">
+      <button id="reshape">Nova Forma</button>
+      <button id="download">Salvar</button>
+    </div>
+
+    <div
+      id="profile-picture"
+      style="
+        position: relative;
+        background: #ffffff;
+        width: 600px;
+        height: 600px;
+      "
+    >
+      <img
+        id="shape"
+        style="
+          background-color: #99ff00;
+          width: 600px;
+          height: 600px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        "
+        src=""
+      />
+      <img
+        id="backshape"
+        src=""
+        style="
+          visibility: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 600px;
+          height: 600px;
+          clip-path: polygon(0 0, 20% 50%, 55% 90%, 100% 0, 50% 0%, 50% 0%);
+        "
+      />
+    </div>
+    <script>
+      $(document).ready(function () {
+        $('#reshape').click(function () {
+          removeEventListener;
+          reshape();
+        });
+
+        reshape();
+
+        $('#but_upload').click(function () {
+          var fd = new FormData();
+          var files = $('#file')[0].files;
+
+          var data = new FormData();
+
+          if (files.length > 0) {
+            fd.append('file', files[0]);
+
+            data.append('image_file', files[0]);
+            data.append('get_base64', 1);
+
+            $.ajax({
+              method: 'POST',
+              url: 'https://api.removal.ai/3.0/remove',
+              headers: {
+                'Rm-Token': '62fc2b52aafa14.31719870',
+              },
+              data,
+              contentType: false,
+              processData: false,
+            }).done(function (res) {
+              console.log('done', res);
+
+              $('#shape').attr('src', res.high_resolution);
+              $('#backshape').attr('src', res.high_resolution);
+              $('#backshape').css('visibility', 'visible');
+            });
+          } else {
+            alert('Por favor, selecione uma foto.');
+          }
+        });
+
+        $('#download').click(function () {
+          console.log('img');
+          domtoimage
+            .toBlob(document.getElementById('profile-picture'))
+            .then(function (blob) {
+              window.saveAs(blob, 'tc-profile-pic.jpg');
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#header {
+  width: 600px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+
+#controls {
+  text-align: center;
+}
+
+#profile-picture {
+  margin: 30px auto;
+}
+
+button {
+  padding: 10px 25px;
+}
