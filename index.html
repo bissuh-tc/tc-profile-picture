@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>TC Profile Maker</title>
-    <link rel="icon" href="logo.svg" />
+    <link rel="icon" href="images/logo.svg" />
 
     <link rel="stylesheet" href="./style.css" />
 
@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="header">
-      <img src="./logo.svg" alt="TC" width="70px" /><br />
+      <img src="images/logo.svg" alt="TC" width="70px" /><br />
       <h1>Profile Picture Maker</h1>
     </div>
     <form method="post" action="" enctype="multipart/form-data" id="myform">
@@ -26,9 +26,15 @@
     </form>
 
     <div id="controls">
-      <button id="reshape">Nova Forma</button>
-      <button id="download">Salvar</button>
+      <button id="reshape">
+        <span>Nova Forma</span><img src="images/reshape.svg" />
+      </button>
+      <button id="download">
+        <span>Salvar</span><img src="images/download.svg" />
+      </button>
     </div>
+
+    <img id="loading" src="images/loading.gif" width="600px" />
 
     <div
       id="profile-picture"
@@ -51,6 +57,7 @@
         "
         src=""
       />
+
       <img
         id="backshape"
         src=""
@@ -61,7 +68,6 @@
           left: 0;
           width: 600px;
           height: 600px;
-          clip-path: polygon(0 0, 20% 50%, 55% 90%, 100% 0, 50% 0%, 50% 0%);
         "
       />
     </div>
@@ -85,6 +91,9 @@
 
             data.append('image_file', files[0]);
             data.append('get_base64', 1);
+            $('#but_upload').attr('disabled', true);
+            $('#loading').css('display', 'block');
+            $('#profile-picture').css('display', 'none');
 
             $.ajax({
               method: 'POST',
@@ -101,6 +110,10 @@
               $('#shape').attr('src', res.high_resolution);
               $('#backshape').attr('src', res.high_resolution);
               $('#backshape').css('visibility', 'visible');
+
+              $('#but_upload').attr('disabled', false);
+              $('#loading').css('display', 'none');
+              $('#profile-picture').css('display', 'block');
             });
           } else {
             alert('Por favor, selecione uma foto.');
@@ -108,7 +121,6 @@
         });
 
         $('#download').click(function () {
-          console.log('img');
           domtoimage
             .toBlob(document.getElementById('profile-picture'))
             .then(function (blob) {
