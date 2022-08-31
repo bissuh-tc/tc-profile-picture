@@ -36,40 +36,35 @@
 
     <img id="loading" src="images/loading.gif" width="600px" />
 
-    <div
-      id="profile-picture"
-      style="
-        position: relative;
-        background: #ffffff;
-        width: 600px;
-        height: 600px;
-      "
-    >
-      <img
-        id="shape"
+    <div id="picture-box">
+      <div
+        id="profile-picture"
         style="
-          background-color: #99ff00;
+          background: #ffffff;
+          position: relative;
           width: 600px;
           height: 600px;
-          position: absolute;
-          top: 0;
-          left: 0;
         "
-        src=""
-      />
+      >
+        <img
+          id="shape"
+          style="background-color: #99ff00; width: 600px; height: 600px"
+          src=""
+        />
 
-      <img
-        id="backshape"
-        src=""
-        style="
-          visibility: hidden;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 600px;
-          height: 600px;
-        "
-      />
+        <img
+          id="backshape"
+          src=""
+          style="
+            visibility: hidden;
+            width: 600px;
+            height: 600px;
+            position: absolute;
+            top: 0;
+            left: 0;
+          "
+        />
+      </div>
     </div>
     <script>
       $(document).ready(function () {
