@@ -29,3 +29,10 @@ function randIn(min, max) {
 $('#file').click(function () {
   $('#file').attr('value', null);
 });
+
+function display_image() {
+  $('#backshape').css('visibility', 'visible');
+  $('#but_upload').attr('disabled', false);
+  $('#loading').css('display', 'none');
+  $('#profile-picture').css('display', 'block');
+}
