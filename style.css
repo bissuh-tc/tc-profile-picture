@@ -17,6 +17,9 @@ form {
   text-align: center;
 }
 
+form label {
+}
+
 #controls {
   text-align: center;
   display: flex;
